@@ -21,9 +21,9 @@ func FatalError(err error) {
 }
 
 func main() {
-	ciphertext := []byte{
-		0x53, 0x9b, 0x33, 0x3b, 0x39, 0x70, 0x6d, 0x14,
-		0x90, 0x28, 0xcf, 0xe1, 0xd9, 0xd4, 0xa4, 0x07,
+	plaintext := []byte{
+		0x29, 0x6c, 0x93, 0xfd, 0xf4, 0x99, 0xaa, 0xeb,
+		0x41, 0x94, 0xba, 0xbc, 0x2e, 0x63, 0x56, 0x1d,
 	}
 	aesKey := make([]byte, keySize)
 	aesKey[0] = 0x80
@@ -34,7 +34,7 @@ func main() {
 		FatalError(err)
 	}
 
-	plaintext := make([]byte, blockSize)
-	blockCipher.Decrypt(plaintext, ciphertext)
-	fmt.Printf("% #x\n", plaintext)
+	ciphertext := make([]byte, blockSize)
+	blockCipher.Encrypt(ciphertext, plaintext)
+	fmt.Printf("% #x\n", ciphertext)
 }
